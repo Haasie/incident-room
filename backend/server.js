@@ -1,57 +1,50 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+require('dotenv').config();
+
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Simpele scenario data
-const scenarios = {
-    initial: {
-        situation: "Er is een verdachte activiteit gedetecteerd op het netwerk. Wat doe je?",
-        reputationScore: 100,
-        availableChoices: [
-            { id: "isolate", text: "Systeem isoleren" },
-            { id: "investigate", text: "Eerst onderzoeken" }
-        ]
-    },
-    after_isolate: {
-        situation: "Je hebt het systeem geïsoleerd. De directie vraagt om uitleg over de downtime.",
-        reputationScore: 85,
-        availableChoices: [
-            { id: "explain", text: "Uitleg geven over de situatie" },
-            { id: "ignore", text: "Negeren en doorgaan met onderzoek" }
-        ]
-    },
-    after_investigate: {
-        situation: "Je onderzoek wijst op een mogelijke phishing poging. Wat is je volgende stap?",
-        reputationScore: 90,
-        availableChoices: [
-            { id: "alert", text: "Waarschuw alle medewerkers" },
-            { id: "contain", text: "Beperk toegang tot gevoelige systemen" }
-        ]
-    }
-};
+// Laad scenario's
+const scenarios = require('./scenarios/ransomware_scenario.json');
 
 // Routes
-app.get('/scenario', (req, res) => {
-    res.json(scenarios.initial);
+app.get('/api/scenarios', (req, res) => {
+    res.json(scenarios);
 });
 
-app.post('/choice', (req, res) => {
-    const { choiceId } = req.body;
+app.post('/api/decisions', (req, res) => {
+    const { decisionId, currentState } = req.body;
 
-    // Simpele logica voor scenario verloop
-    if (choiceId === 'isolate') {
-        res.json(scenarios.after_isolate);
-    } else if (choiceId === 'investigate') {
-        res.json(scenarios.after_investigate);
-    } else {
-        res.json(scenarios.initial);
-    }
+    // Simuleer een response
+    const response = {
+        newSituation: "Nieuwe situatie na beslissing...",
+        reputationScore: 85,
+        availableDecisions: [
+            "Volgende beslissing 1",
+            "Volgende beslissing 2"
+        ]
+    };
+
+    res.json(response);
 });
 
+app.get('/api/post-mortem', (req, res) => {
+    const postMortem = {
+        score: 85,
+        learningPoints: scenarios.learningPoints,
+        bestPractices: scenarios.bestPractices
+    };
+
+    res.json(postMortem);
+});
+
+// Start server
 app.listen(port, () => {
     console.log(`Server draait op poort ${port}`);
 });

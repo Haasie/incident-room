@@ -1,0 +1,93 @@
+{
+    "scenarioName": "Ransomware Aanval",
+    "description": "Er is een ransomware aanval gedetecteerd op het bedrijfsnetwerk. Als CISO moet je snel handelen om de impact te minimaliseren.",
+    "totalTimeInMinutes": 15,
+    "states": [
+        {
+            "id": "initial_detection",
+            "description": "De security operations center (SOC) heeft een verdachte activiteit gedetecteerd. Er zijn meerdere bestanden versleuteld op verschillende servers. De ransomware lijkt zich snel te verspreiden.",
+            "availableDecisions": [
+                {
+                    "id": "isolate_network",
+                    "text": "Isoleer het netwerk onmiddellijk",
+                    "consequences": [
+                        "Alle externe verbindingen worden verbroken",
+                        "Interne communicatie blijft mogelijk",
+                        "Productieprocessen worden onderbroken"
+                    ],
+                    "reputationImpact": 10
+                },
+                {
+                    "id": "investigate_first",
+                    "text": "Eerst onderzoeken, dan handelen",
+                    "consequences": [
+                        "Meer tijd om de situatie te analyseren",
+                        "Risico op verdere verspreiding",
+                        "Betere informatie voor besluitvorming"
+                    ],
+                    "reputationImpact": -15
+                },
+                {
+                    "id": "notify_management",
+                    "text": "Direct management informeren",
+                    "consequences": [
+                        "Management is op de hoogte",
+                        "Vertraging in directe actie",
+                        "Betere coördinatie mogelijk"
+                    ],
+                    "reputationImpact": 5
+                }
+            ],
+            "timeLimit": 300
+        },
+        {
+            "id": "after_isolation",
+            "description": "Het netwerk is geïsoleerd. De ransomware verspreidt zich niet meer, maar veel systemen zijn offline. Er zijn meldingen van klanten over uitval van diensten.",
+            "availableDecisions": [
+                {
+                    "id": "start_recovery",
+                    "text": "Start recovery proces",
+                    "consequences": [
+                        "Systemen worden hersteld van backups",
+                        "Diensten komen geleidelijk terug online",
+                        "Kosten voor recovery operaties"
+                    ],
+                    "reputationImpact": 20
+                },
+                {
+                    "id": "contact_ransomware_group",
+                    "text": "Contact opnemen met ransomware groep",
+                    "consequences": [
+                        "Mogelijkheid tot onderhandeling",
+                        "Risico op reputatieschade",
+                        "Onzekere uitkomst"
+                    ],
+                    "reputationImpact": -30
+                },
+                {
+                    "id": "public_statement",
+                    "text": "Persbericht uitgeven",
+                    "consequences": [
+                        "Transparante communicatie",
+                        "Klanten zijn geïnformeerd",
+                        "Media aandacht"
+                    ],
+                    "reputationImpact": 15
+                }
+            ],
+            "timeLimit": 300
+        }
+    ],
+    "learningPoints": [
+        "Snelle detectie en respons zijn cruciaal bij ransomware aanvallen",
+        "Netwerk segmentatie kan de impact van een aanval beperken",
+        "Goede backup strategieën zijn essentieel voor recovery",
+        "Transparante communicatie is belangrijk voor reputatie management"
+    ],
+    "bestPractices": [
+        "Implementeer zero-trust netwerk architectuur",
+        "Houd regelmatig security awareness trainingen",
+        "Test recovery procedures regelmatig",
+        "Ontwikkel een duidelijk incident response plan"
+    ]
+}

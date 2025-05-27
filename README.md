@@ -1,61 +1,68 @@
-# The Incident Room - Cybersecurity Simulator
+# The Incident Room
 
 Een educatieve WebGL-applicatie die een cybersecurity-incident simuleert. De speler neemt de rol aan van een CISO (Chief Information Security Officer) en moet beslissingen nemen tijdens een realtime incident.
 
-## Technische Vereisten
+## Technische Specificaties
 
-- Unity 2022.3 LTS of nieuwer
-- TextMeshPro package
-- WebGL build support
-
-## Project Setup
-
-1. Clone deze repository
-2. Open het project in Unity
-3. Installeer de benodigde packages via Package Manager:
-   - TextMeshPro
-   - WebGL Build Support
+- Unity versie: 6000.1.4f1
+- Platform: WebGL
+- Frontend: Unity WebGL build
+- Backend: REST API (Node.js/Express)
 
 ## Projectstructuur
 
 ```
 Assets/
 ├── Scripts/
-│   ├── IncidentManager.cs    # Hoofdlogica van het spel
-│   ├── APIManager.cs         # API communicatie
-│   └── EndScreenManager.cs   # Eindscherm beheer
+│   ├── Core/
+│   │   ├── GameManager.cs
+│   │   ├── APIManager.cs
+│   │   └── ScenarioManager.cs
+│   ├── UI/
+│   │   ├── DashboardUI.cs
+│   │   ├── TimerUI.cs
+│   │   └── ScoreUI.cs
+│   └── Models/
+│       ├── Scenario.cs
+│       └── IncidentResponse.cs
+├── Scenes/
+│   ├── MainMenu.unity
+│   └── IncidentRoom.unity
 ├── Prefabs/
-│   └── UI/                   # UI prefabs
-└── Scenes/
-    └── Main.unity           # Hoofdscene
+│   ├── UI/
+│   └── Effects/
+└── Resources/
+    └── Scenarios/
 ```
 
-## API Integratie
+## Setup Instructies
 
-De applicatie communiceert met een REST API voor:
-- Laden van scenario's
-- Verwerken van keuzes
-- Ophalen van feedback
-
-API Endpoints:
-- GET /scenario - Laadt het huidige scenario
-- POST /choice - Verwerkt een gemaakte keuze
-
-## WebGL Build
-
-1. Open Build Settings (File > Build Settings)
-2. Selecteer WebGL als platform
-3. Klik op "Switch Platform"
-4. Configureer de WebGL settings:
-   - Enable "Development Build" voor debugging
-   - Set "Compression Format" naar "Disabled" voor development
-5. Klik op "Build" en kies een output directory
+1. Clone deze repository
+2. Open het project in Unity 6000.1.4f1
+3. Open de `Scenes/IncidentRoom.unity` scene
+4. Druk op Play om de applicatie te testen
 
 ## Development
 
-Voor lokale ontwikkeling zonder API:
-1. Gebruik de test scenario's in IncidentManager.cs
-2. Pas de apiBaseUrl aan naar een lokale mock server
+### Frontend (Unity)
+- Gebruik Unity 6000.1.4f1
+- Alle webverzoeken via UnityWebRequest
+- WebGL-compatibele code (geen threading)
+
+### Backend (Node.js/Express)
+- REST API voor scenario management
+- Stateless design voor gratis hosting
+- JSON responses voor Unity client
+
+## Deployment
+
+### Frontend
+1. Build WebGL versie in Unity
+2. Deploy naar GitHub Pages
+
+### Backend
+1. Deploy naar Render.com (gratis tier)
+2. Configureer environment variables
 
 ## Licentie
 
